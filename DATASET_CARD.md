@@ -16,7 +16,11 @@
 <Language>/<domain>/<program>.py
 ```
 
-Python domains currently include `cli_text`, `algorithms`, `games`, `data_web`, and `advanced`.
+Python domains currently include `cli_text`, `algorithms`, `games`, `data_web`,
+`advanced`, and `libraryCodeSet`. The first five are dependency-free; 
+`libraryCodeSet` contains 15 illustrative examples for third-party libraries
+(NumPy, pandas, Matplotlib, Flask, FastAPI, Pydantic, and others). Those files
+were syntax-checked only and are explicitly documented as not runtime-tested.
 
 ## Intended use
 
@@ -35,11 +39,12 @@ Python domains currently include `cli_text`, `algorithms`, `games`, `data_web`, 
 
 ## Quality process
 
-1. Each program is written to a shared specification: docstring, type hints, argument parsing, input validation, `main()` guard.
+1. Each core program is written to a shared specification: docstring, type hints, argument parsing, input validation, `main()` guard.
 2. Every file must pass `python -m py_compile`.
-3. Every file is smoke-tested: CLI `--help`, self-tests with assertions, or offline/demo mode for networked tools.
+3. Every core file is smoke-tested: CLI `--help`, self-tests with assertions, or offline/demo mode for networked tools.
 4. GUI programs are imported without launching a window during testing.
-5. A manifest with line counts and SHA-256 hashes can be generated with `python tools/build_manifest.py`.
+5. `libraryCodeSet` files receive syntax checks only; their third-party dependencies are optional and their runtime behaviour is unverified.
+6. A manifest with line counts and SHA-256 hashes can be generated with `python tools/build_manifest.py`.
 
 ## Known limitations
 

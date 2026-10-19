@@ -1,8 +1,10 @@
-# Python — 110 standalone programs
+# Python — 125 single-file programs
 
-Single-file Python programs for code-model training and human reference.
-Every file is self-contained, uses **only the standard library**, targets
-**Python 3.10+**, and runs on Windows, macOS, and Linux.
+110 dependency-free programs plus 15 examples for popular third-party
+libraries. The core programs use **only the standard library**, target
+**Python 3.10+**, and run on Windows, macOS, and Linux. The library examples
+need their libraries installed and are **not runtime-tested** (see the warning
+in [libraryCodeSet](libraryCodeSet/)).
 
 | Domain | Programs | Lines | What it covers |
 |---|---:|---:|---|
@@ -11,7 +13,12 @@ Every file is self-contained, uses **only the standard library**, targets
 | [games](games/) | 22 | 5,058 | terminal games, tkinter games, deterministic simulations |
 | [data_web](data_web/) | 22 | 5,359 | CSV/JSON/SQLite, HTTP clients & servers, automation, reporting |
 | [advanced](advanced/) | 22 | 5,319 | asyncio, threads, multiprocessing, graphics, audio, systems |
-| **Total** | **110** | **26,734** | |
+| [libraryCodeSet](libraryCodeSet/) | 15 | 5,427 | NumPy, pandas, Matplotlib, Seaborn, SciPy, sklearn, Flask, FastAPI, … |
+| **Total** | **125** | **32,161** | |
+
+> **Note:** `libraryCodeSet` is different by design. Those 15 files depend on
+> third-party packages, were only syntax-checked, and are illustrations of
+> library APIs — not tested reference code. Read its README before using them.
 
 Run anything with `--help`, or open the file and read the module docstring:
 
@@ -158,11 +165,37 @@ python Python/algorithms/sorting_algorithms.py
 | [terminal_dashboard.py](advanced/terminal_dashboard.py) | ANSI live dashboard with simulated metrics and clean terminal restore. |
 | [progress_bar.py](advanced/progress_bar.py) | ANSI progress bars with rate/ETA and TTY/Unicode fallbacks. |
 
+## libraryCodeSet — third-party library examples
+
+> ⚠️ **Not line-by-line tested.** These files were syntax-checked only and
+> require `pip install -r libraryCodeSet/requirements.txt`. They illustrate
+> common APIs; they are not production code or a correctness oracle. See
+> [libraryCodeSet/README.md](libraryCodeSet/README.md) for the full notice.
+
+| File | Library | Focus |
+|---|---|---|
+| [numpy_examples.py](libraryCodeSet/numpy_examples.py) | NumPy | arrays, broadcasting, linalg, FFT, persistence |
+| [pandas_examples.py](libraryCodeSet/pandas_examples.py) | pandas | cleaning, groupby, merges, reshaping, time series, I/O |
+| [matplotlib_examples.py](libraryCodeSet/matplotlib_examples.py) | Matplotlib | plot types, subplots, annotations, styles, export |
+| [seaborn_examples.py](libraryCodeSet/seaborn_examples.py) | Seaborn | relational, categorical, distribution, matrix, facet plots |
+| [scipy_examples.py](libraryCodeSet/scipy_examples.py) | SciPy | integration, optimization, stats, signals, sparse |
+| [sklearn_examples.py](libraryCodeSet/sklearn_examples.py) | scikit-learn | preprocessing, models, clustering, PCA, tuning |
+| [requests_examples.py](libraryCodeSet/requests_examples.py) | requests | sessions, verbs, retries, streaming, auth, errors |
+| [bs4_examples.py](libraryCodeSet/bs4_examples.py) | Beautiful Soup | parsing, selectors, navigation, tables, editing |
+| [flask_examples.py](libraryCodeSet/flask_examples.py) | Flask | routes, JSON API, blueprints, hooks, test client |
+| [fastapi_examples.py](libraryCodeSet/fastapi_examples.py) | FastAPI | typed routes, Pydantic models, dependencies, routers |
+| [sqlalchemy_examples.py](libraryCodeSet/sqlalchemy_examples.py) | SQLAlchemy | ORM 2.0, relationships, joins, transactions, Core |
+| [pytest_examples.py](libraryCodeSet/pytest_examples.py) | pytest | fixtures, parametrize, monkeypatch, marks |
+| [pillow_examples.py](libraryCodeSet/pillow_examples.py) | Pillow | drawing, geometry, filters, blending, GIF |
+| [openpyxl_examples.py](libraryCodeSet/openpyxl_examples.py) | openpyxl | styles, formulas, charts, validation, read-back |
+| [pydantic_examples.py](libraryCodeSet/pydantic_examples.py) | Pydantic v2 | models, validators, unions, serialization, schema |
+
 ---
 
 ## Conventions
 
-- **Standard library only.** No `requirements.txt`, no virtualenv needed.
+- **Standard library only** for the 110 core programs: no `requirements.txt`, no virtualenv needed.
+- **Exception:** `libraryCodeSet/` documents its third-party dependencies in `requirements.txt`.
 - **Typed and documented.** Module docstring, type hints, decomposed functions, `main()` guard.
 - **Defensive.** Invalid input raises or exits with a message on `stderr`; no silent data loss.
 - **Safe defaults.** Mutating tools preview (`--dry-run`) or require `--apply`/`--force`.
@@ -171,8 +204,10 @@ python Python/algorithms/sorting_algorithms.py
 
 ## Verification status
 
-All 110 files pass `python -m py_compile` and were executed during review.
-CLI tools were exercised with `--help` and real fixtures; GUI programs were
+All 125 files pass `python -m py_compile`. The 110 core files were executed
+during review; the 15 `libraryCodeSet` files were **not** run because their
+optional dependencies were not installed. Core CLI tools were exercised with
+`--help` and real fixtures; GUI programs were
 imported without opening a window; servers and downloaders were tested against
 local ephemeral servers; generated PNG, WAV, SVG, and PostScript artifacts were
 parsed back and validated.

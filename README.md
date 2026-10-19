@@ -1,6 +1,6 @@
 # Program Dataset
 
-A curated, language-by-language collection of **single-file programs** built to be a clean, practical dataset for training and evaluating code models.
+A curated, language-by-language collection of **single-file programs** built to be a clean, practical dataset for training and evaluating code models. It contains 110 dependency-free Python programs plus 15 examples for popular third-party libraries.
 
 Every program is standalone, readable, and runnable with a standard interpreter — no package installs, no build step, no hidden project scaffolding. The point is to give models high-quality examples of *complete* programs: a real CLI, real edge-case handling, real docstrings, real tests-by-running.
 
@@ -34,7 +34,8 @@ VIBE_DATASET/
     ├── algorithms/             # data structures, algorithms, math
     ├── games/                  # terminal games, tkinter games, simulations
     ├── data_web/               # CSV/SQLite, HTTP, automation, reporting
-    └── advanced/               # asyncio, multiprocessing, graphics, audio
+    ├── advanced/               # asyncio, multiprocessing, graphics, audio
+    └── libraryCodeSet/         # examples for NumPy, pandas, Flask, FastAPI, …
 ```
 
 Each language gets its own top-level folder. Each domain gets a subfolder. One program = one file.
@@ -50,6 +51,7 @@ Each language gets its own top-level folder. Each domain gets a subfolder. One p
 | `Python/games` | Playable games & simulations | `tetris.py`, `minesweeper.py`, `conway_life.py`, `predator_prey.py` |
 | `Python/data_web` | Data, SQLite, HTTP, automation | `sqlite_crud.py`, `rest_api_server.py`, `data_pipeline.py`, `svg_chart.py` |
 | `Python/advanced` | Concurrency, graphics, audio, systems | `asyncio_worker_pool.py`, `png_writer.py`, `wav_synth.py`, `mini_shell.py` |
+| `Python/libraryCodeSet` | Third-party library examples *(not runtime-tested)* | `numpy_examples.py`, `pandas_examples.py`, `flask_examples.py`, `pydantic_examples.py` |
 
 See [`Python/README.md`](Python/README.md) for the full index.
 
@@ -60,10 +62,14 @@ See [`Python/README.md`](Python/README.md) for the full index.
 No installation required — Python 3.10+ and the standard library.
 
 ```bash
-# Run any program
+# Run any dependency-free program
 python Python/algorithms/sorting_algorithms.py
 python Python/cli_text/word_frequency.py --help
 python Python/games/tic_tac_toe.py
+
+# Library examples need their packages first (see the folder README)
+pip install -r Python/libraryCodeSet/requirements.txt
+python Python/libraryCodeSet/numpy_examples.py
 
 # Generate a dataset manifest (file count, line counts, sha256)
 python tools/build_manifest.py
@@ -75,7 +81,12 @@ GUI programs use `tkinter` (bundled with Python on Windows and macOS). On Linux 
 
 ## Quality standards
 
-Every program in this repository is expected to:
+The 110 core programs follow all six rules below. The 15 files in
+`Python/libraryCodeSet` are an intentional exception: they need third-party
+packages, were only syntax-checked, and are documented as untested examples in
+that folder's README.
+
+Every core program in this repository is expected to:
 
 1. Be **self-contained** — standard library only, no `pip install`.
 2. Be **complete** — module docstring, type hints, decomposed functions, `if __name__ == "__main__": main()`.
