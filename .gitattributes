@@ -1,0 +1,26 @@
+# Normalize line endings so the dataset is byte-identical across platforms.
+* text=auto eol=lf
+
+*.py   text eol=lf
+*.js   text eol=lf
+*.ts   text eol=lf
+*.rs   text eol=lf
+*.go   text eol=lf
+*.c    text eol=lf
+*.cpp  text eol=lf
+*.java text eol=lf
+*.md   text eol=lf
+*.json text eol=lf
+*.toml text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+
+# Binary assets should never be converted.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.wav  binary
+*.mp3  binary
+*.zip  binary
+*.pdf  binary
